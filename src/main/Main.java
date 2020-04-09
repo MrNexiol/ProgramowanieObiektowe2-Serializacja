@@ -9,7 +9,12 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Main extends Application {
 
@@ -45,7 +50,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         nameLabel = new Label("Name: ");
         nameInput = new TextField();
 
@@ -86,6 +91,22 @@ public class Main extends Application {
             String serializedPerson = gson.toJson(person);
 
             System.out.println(serializedPerson);
+
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+            fileChooser.getExtensionFilters().add(extensionFilter);
+
+            File file = fileChooser.showSaveDialog(stage);
+
+            if (file != null){
+                try {
+                    PrintWriter writer = new PrintWriter(file);
+                    writer.println(serializedPerson);
+                    writer.close();
+                }catch (IOException e){
+                    System.out.println("Error");
+                }
+            }
         });
 
         gridPane = new GridPane();
