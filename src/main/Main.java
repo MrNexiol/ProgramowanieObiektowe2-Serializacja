@@ -12,9 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class Main extends Application {
 
@@ -100,7 +98,9 @@ public class Main extends Application {
 
             if (file != null){
                 try {
-                    PrintWriter writer = new PrintWriter(file);
+                    FileWriter fw = new FileWriter(file,true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    PrintWriter writer = new PrintWriter(bw);
                     writer.println(serializedPerson);
                     writer.close();
                 }catch (IOException e){
