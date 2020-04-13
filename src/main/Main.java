@@ -94,7 +94,7 @@ public class Main extends Application {
             FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
             fileChooser.getExtensionFilters().add(extensionFilter);
 
-            File file = fileChooser.showSaveDialog(stage);
+            File file = fileChooser.showOpenDialog(stage);
 
             if (file != null){
                 try {
